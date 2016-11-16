@@ -30,18 +30,17 @@ class CheckersMain:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
-            self.snake_sprites.draw(self.screen)
+            self.StartButton_sprites.draw(self.screen)
             pygame.display.flip()
 
     def LoadSprites(self):
-        self.snake = Snake()
-        self.snake_sprites = pygame.sprite.RenderPlain((self.snake))
+        self.StartButton = StartButton()
+        self.StartButton_sprites = pygame.sprite.RenderPlain((self.StartButton))
 
-class Snake(pygame.sprite.Sprite):
+class StartButton(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.image, self.rect = load_image('start.png',-1)
-        self.pellets = 0
 
 if __name__ == "__main__":
     MainWindow = CheckersMain()
