@@ -10,14 +10,16 @@ class CheckersMain:
         self.width = width
         self.height = height
         self.screen = pygame.display.set_mode((self.width, self.height))
-        self.image = pygame.image.load("assets/start.png")
+        self.start_image = pygame.image.load("assets/start.png")
+        self.title1_image = pygame.image.load("assets/title1.png")
 
     def MainLoop(self):
         while 1:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
-            self.screen.blit(self.image, (355, 450))
+            self.screen.blit(self.start_image, (355, 450))
+            self.screen.blit(self.title1_image, (240, 10))
             pygame.display.flip()
 
 
