@@ -41,7 +41,7 @@ while True:
     pygame.event.pump()
     screen.fill((0, 0, 0))
     screen.blit(bg,(0,0))
-    screen.blit(title1,(240,10))
+    screen.blit(title1,(0,0))
     for option in options:
         if option.rect.collidepoint(pygame.mouse.get_pos()):
             option.hovered = True
