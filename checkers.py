@@ -36,7 +36,7 @@ class Option:
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
 menu_font = pygame.font.Font(None, 180)
-options = [Option("START", (400, 400))]
+button = options = [Option("START", (400, 400))]
 while True:
     pygame.event.pump()
     screen.fill((0, 0, 0))
@@ -49,3 +49,8 @@ while True:
             option.hovered = False
         option.draw()
     pygame.display.update()
+    for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                pos = pygame.mouse.get_pos()
+                if button.collidepoint(pos):
+                    pass
