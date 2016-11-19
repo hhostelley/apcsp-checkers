@@ -4,6 +4,10 @@ from pygame.locals import *
 
 bg = pygame.image.load('assets/bg.png')
 title1 = pygame.image.load('assets/title1.png')
+red_piece = pygame.image.load('assets/red_piece.png')
+black_piece = pygame.image.load('assets/black_piece.png')
+board = pygame.image.load('assets/board.png')
+black = (0,0,0)
 
 class Main:
 
@@ -13,10 +17,12 @@ class Main:
         self.height = height
         self.screen = pygame.display.set_mode((self.width, self.height))
 
-
-
-    def hey(self):
-        self.screen.blit(title1,(100,100))
+    def Game(self):
+        self.screen.fill(black)
+        self.screen.blit(bg,(0,0))
+        self.screen.blit(black_piece,(0,0))
+        self.screen.blit(red_piece,(100,0))
+        self.screen.blit(board,(235,0))
 
     def MainLoop(self):
         button = False
@@ -28,7 +34,7 @@ class Main:
             start = pygame.image.load('assets/start.png').convert_alpha()
             b = self.screen.blit(start,(400,400))
             if button == True:
-                MainWindow.hey()
+                MainWindow.Game()
             pygame.display.update()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
