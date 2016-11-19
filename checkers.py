@@ -5,52 +5,40 @@ from pygame.locals import *
 bg = pygame.image.load('assets/bg.png')
 title1 = pygame.image.load('assets/title1.png')
 
-class Option:
+class Main:
 
-    hovered = False
+    def __init__(self, width=1280,height=720):
+        pygame.init()
+        self.width = width
+        self.height = height
+        self.screen = pygame.display.set_mode((self.width, self.height))
 
-    def __init__(self, text, pos):
-        self.text = text
-        self.pos = pos
-        self.set_rect()
-        self.draw()
 
-    def draw(self):
-        self.set_rend()
-        screen.blit(self.rend, self.rect)
 
-    def set_rend(self):
-        self.rend = menu_font.render(self.text, True, self.get_color())
+    def hey(self):
+        self.screen.blit(title1,(100,100))
 
-    def get_color(self):
-        if self.hovered:
-            return (255, 255, 255)
-        else:
-            return (100, 100, 100)
+    def MainLoop(self):
+        button = False
+        while 1:
+            pygame.event.pump()
+            self.screen.fill((0, 0, 0))
+            self.screen.blit(bg,(0,0))
+            self.screen.blit(title1,(0,0))
+            start = pygame.image.load('assets/start.png').convert_alpha()
+            b = self.screen.blit(start,(400,400))
+            if button == True:
+                MainWindow.hey()
+            pygame.display.update()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                    pos = pygame.mouse.get_pos()
+                    if b.collidepoint(pos):
+                        button = True
+                        pygame.display.update()
 
-    def set_rect(self):
-        self.set_rend()
-        self.rect = self.rend.get_rect()
-        self.rect.topleft = self.pos
-
-pygame.init()
-screen = pygame.display.set_mode((1280, 720))
-menu_font = pygame.font.Font(None, 180)
-button = options = [Option("START", (400, 400))]
-while True:
-    pygame.event.pump()
-    screen.fill((0, 0, 0))
-    screen.blit(bg,(0,0))
-    screen.blit(title1,(0,0))
-    for option in options:
-        if option.rect.collidepoint(pygame.mouse.get_pos()):
-            option.hovered = True
-        else:
-            option.hovered = False
-        option.draw()
-    pygame.display.update()
-    for event in pygame.event.get():
-            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                pos = pygame.mouse.get_pos()
-                if button.collidepoint(pos):
-                    pass
+if __name__ == "__main__":
+    MainWindow = Main()
+    MainWindow.MainLoop()
