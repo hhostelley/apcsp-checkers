@@ -18,16 +18,23 @@ class Main:
 
     def __init__(self, width=1280,height=720):
         pygame.init()
+        pygame.display.set_caption("Super Radical Checkers")
         self.width = width
         self.height = height
         self.screen = pygame.display.set_mode((self.width, self.height))
 
     def Game(self):
-        self.screen.fill(black)
         self.screen.blit(bg,(0,0))
         self.screen.blit(black_piece,(0,0))
         self.screen.blit(red_piece,(100,0))
         self.screen.blit(board,(235,0))
+        self.window_size = 720
+        self.square_size = self.window_size / 8
+        self.piece_size = self.square_size / 2
+        for x in xrange(8):
+			for y in xrange(8):
+				pygame.draw.rect(self.screen, board[x][y].color, (x * self.square_size, y * self.square_size, self.square_size, self.square_size), )
+
 
     def MainLoop(self):
         button = False
