@@ -7,7 +7,12 @@ title1 = pygame.image.load('assets/title1.png')
 red_piece = pygame.image.load('assets/red_piece.png')
 black_piece = pygame.image.load('assets/black_piece.png')
 board = pygame.image.load('assets/board.png')
-black = (0,0,0)
+black    = (  0,   0,   0)
+WHITE    = (255, 255, 255)
+BLUE     = (  0,   0, 255)
+RED      = (255,   0,   0)
+GOLD     = (255, 215,   0)
+HIGH     = (160, 190, 255)
 
 class Main:
 
