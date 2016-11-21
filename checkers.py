@@ -37,7 +37,7 @@ class Main:
             self.screen.blit(bg,(0,0))
             self.screen.blit(title1,(0,0))
             start = pygame.image.load('assets/start.png').convert_alpha()
-            b = self.screen.blit(start,(400,400))
+            b = self.screen.blit(start,(350,400))
             if button == True:
                 MainWindow.Game()
             pygame.display.update()
