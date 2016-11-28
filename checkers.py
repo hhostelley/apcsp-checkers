@@ -60,13 +60,9 @@ class Game:
     def __init__(self):
         self.graphics = Graphics()
         self.board = Board()
-    	self.turn = BLUE
-        self.selected_piece = None # a board location.
-        self.hop = False
-        self.selected_legal_moves = []
 
     def update(self):
-        self.graphics.update_display(self.board, self.selected_legal_moves, self.selected_piece)
+        self.graphics.update_display(self.board)
 
     def setup(self):
         self.graphics.setup_window()
@@ -83,8 +79,6 @@ class Graphics:
 	def __init__(self):
 		self.caption = "Checkers"
 
-		self.clock = pygame.time.Clock()
-
 		self.window_size = 600
 		self.screen = pygame.display.set_mode((self.window_size, self.window_size))
 		self.background = pygame.image.load('assets/board.png')
@@ -98,18 +92,16 @@ class Graphics:
 		pygame.init()
 		pygame.display.set_caption(self.caption)
 
-	def update_display(self, board, legal_moves, selected_piece):
+	def update_display(self, board):
 		self.screen.blit(self.background, (0,0))
-
-		self.highlight_squares(legal_moves, selected_piece)
 		self.draw_board_pieces(board)
 
 		if self.message:
 			self.screen.blit(self.text_surface_obj, self.text_rect_obj)
 
 		pygame.display.update()
-		self.clock.tick(60)
 
+#third party code
 	def draw_board_squares(self, board):
 		for x in xrange(8):
 			for y in xrange(8):
@@ -131,24 +123,20 @@ class Graphics:
 	def board_coords(self, (pixel_x, pixel_y)):
 		return (pixel_x / self.square_size, pixel_y / self.square_size)
 
-	def highlight_squares(self, squares, origin):
-		for square in squares:
-			pygame.draw.rect(self.screen, HIGH, (square[0] * self.square_size, square[1] * self.square_size, self.square_size, self.square_size))
-
-		if origin != None:
-			pygame.draw.rect(self.screen, HIGH, (origin[0] * self.square_size, origin[1] * self.square_size, self.square_size, self.square_size))
-
 	def draw_message(self, message):
 		self.message = True
 		self.font_obj = pygame.font.Font('freesansbold.ttf', 44)
 		self.text_surface_obj = self.font_obj.render(message, True, HIGH, BLACK)
 		self.text_rect_obj = self.text_surface_obj.get_rect()
 		self.text_rect_obj.center = (self.window_size / 2, self.window_size / 2)
+#end third party code
+
 
 class Board:
 	def __init__(self):
 		self.matrix = self.new_board()
 
+# thrid party code
 	def new_board(self):
 		matrix = [[None] * 8 for i in xrange(8)]
 		# The following code block has been adapted from
@@ -204,6 +192,8 @@ class Board:
 
 	def location(self, (x,y)):
 		return self.matrix[x][y]
+
+#end third party code
 
 class Square:
 	def __init__(self, color, occupant = None):
