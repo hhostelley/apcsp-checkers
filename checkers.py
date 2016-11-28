@@ -1,6 +1,11 @@
 import sys, pygame
 import os
 from pygame.locals import *
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
+def flush():
+    sys.stdout.flush()
 
 bg = pygame.image.load('assets/bg.png')
 title1 = pygame.image.load('assets/title1.png')
