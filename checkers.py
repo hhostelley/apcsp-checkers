@@ -80,7 +80,7 @@ class Graphics:
 
 		self.square_size = self.window_size / 8
 		self.piece_size = self.square_size / 2
-        
+
 	def setup_window(self):
 		pygame.init()
 		pygame.display.set_caption(self.caption)
@@ -148,6 +148,7 @@ class Board:
 		return self.matrix[x][y]
 
 #end third party code
+#
 
 class Square:
 	def __init__(self, color, occupant = None):
