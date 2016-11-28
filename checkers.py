@@ -80,9 +80,7 @@ class Graphics:
 
 		self.square_size = self.window_size / 8
 		self.piece_size = self.square_size / 2
-
-		self.message = False
-
+        
 	def setup_window(self):
 		pygame.init()
 		pygame.display.set_caption(self.caption)
@@ -90,9 +88,6 @@ class Graphics:
 	def update_display(self, board):
 		self.screen.blit(self.background, (0,0))
 		self.draw_board_pieces(board)
-
-		if self.message:
-			self.screen.blit(self.text_surface_obj, self.text_rect_obj)
 
 		pygame.display.update()
 
