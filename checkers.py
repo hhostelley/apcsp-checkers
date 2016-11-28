@@ -200,83 +200,15 @@ class Board:
 			return 0
 
 	def adjacent(self, (x,y)):
-
-
 		return [self.rel(NORTHWEST, (x,y)), self.rel(NORTHEAST, (x,y)),self.rel(SOUTHWEST, (x,y)),self.rel(SOUTHEAST, (x,y))]
 
 	def location(self, (x,y)):
 		return self.matrix[x][y]
 
-	def blind_legal_moves(self, (x,y)):
-		if self.matrix[x][y].occupant != None:
-
-			if self.matrix[x][y].occupant.king == False and self.matrix[x][y].occupant.color == BLUE:
-				blind_legal_moves = [self.rel(NORTHWEST, (x,y)), self.rel(NORTHEAST, (x,y))]
-
-			elif self.matrix[x][y].occupant.king == False and self.matrix[x][y].occupant.color == RED:
-				blind_legal_moves = [self.rel(SOUTHWEST, (x,y)), self.rel(SOUTHEAST, (x,y))]
-
-			else:
-				blind_legal_moves = [self.rel(NORTHWEST, (x,y)), self.rel(NORTHEAST, (x,y)), self.rel(SOUTHWEST, (x,y)), self.rel(SOUTHEAST, (x,y))]
-
-		else:
-			blind_legal_moves = []
-
-		return blind_legal_moves
-
-	def legal_moves(self, (x,y), hop = False):
-		blind_legal_moves = self.blind_legal_moves((x,y))
-		legal_moves = []
-
-		if hop == False:
-			for move in blind_legal_moves:
-				if hop == False:
-					if self.on_board(move):
-						if self.location(move).occupant == None:
-							legal_moves.append(move)
-
-						elif self.location(move).occupant.color != self.location((x,y)).occupant.color and self.on_board((move[0] + (move[0] - x), move[1] + (move[1] - y))) and self.location((move[0] + (move[0] - x), move[1] + (move[1] - y))).occupant == None: # is this location filled by an enemy piece?
-							legal_moves.append((move[0] + (move[0] - x), move[1] + (move[1] - y)))
-
-		else: # hop == True
-			for move in blind_legal_moves:
-				if self.on_board(move) and self.location(move).occupant != None:
-					if self.location(move).occupant.color != self.location((x,y)).occupant.color and self.on_board((move[0] + (move[0] - x), move[1] + (move[1] - y))) and self.location((move[0] + (move[0] - x), move[1] + (move[1] - y))).occupant == None: # is this location filled by an enemy piece?
-						legal_moves.append((move[0] + (move[0] - x), move[1] + (move[1] - y)))
-
-		return legal_moves
-
-	def remove_piece(self, (x,y)):
-		self.matrix[x][y].occupant = None
-
-	def move_piece(self, (start_x, start_y), (end_x, end_y)):
-		self.matrix[end_x][end_y].occupant = self.matrix[start_x][start_y].occupant
-		self.remove_piece((start_x, start_y))
-
-		self.king((end_x, end_y))
-
-	def is_end_square(self, coords):
-		if coords[1] == 0 or coords[1] == 7:
-			return True
-		else:
-			return False
-
-	def on_board(self, (x,y)):
-		if x < 0 or y < 0 or x > 7 or y > 7:
-			return False
-		else:
-			return True
-
-
-	def king(self, (x,y)):
-		if self.location((x,y)).occupant != None:
-			if (self.location((x,y)).occupant.color == BLUE and y == 0) or (self.location((x,y)).occupant.color == RED and y == 7):
-				self.location((x,y)).occupant.king = True
-
 class Square:
 	def __init__(self, color, occupant = None):
 		self.color = color # color is either BLACK or WHITE
-		self.occupant = occupant # occupant is a Square objec
+		self.occupant = occupant # occupant is a Square object
 
 class Piece:
 	def __init__(self, color, king = False):
