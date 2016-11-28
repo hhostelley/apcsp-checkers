@@ -15,11 +15,6 @@ RED      = (255,   0,   0)
 GOLD     = (255, 215,   0)
 HIGH     = (160, 190, 255)
 
-##DIRECTIONS##
-NORTHWEST = "northwest"
-NORTHEAST = "northeast"
-SOUTHWEST = "southwest"
-SOUTHEAST = "southeast"
 
 class Main:
 
@@ -122,13 +117,6 @@ class Graphics:
 
 	def board_coords(self, (pixel_x, pixel_y)):
 		return (pixel_x / self.square_size, pixel_y / self.square_size)
-
-	def draw_message(self, message):
-		self.message = True
-		self.font_obj = pygame.font.Font('freesansbold.ttf', 44)
-		self.text_surface_obj = self.font_obj.render(message, True, HIGH, BLACK)
-		self.text_rect_obj = self.text_surface_obj.get_rect()
-		self.text_rect_obj.center = (self.window_size / 2, self.window_size / 2)
 #end third party code
 
 
@@ -160,35 +148,6 @@ class Board:
 					matrix[x][y].occupant = Piece(BLUE)
 
 		return matrix
-
-	def board_string(self, board):
-
-		board_string = [[None] * 8] * 8
-
-		for x in xrange(8):
-			for y in xrange(8):
-				if board[x][y].color == WHITE:
-					board_string[x][y] = "WHITE"
-				else:
-					board_string[x][y] = "BLACK"
-
-
-		return board_string
-
-	def rel(self, dir, (x,y)):
-		if dir == NORTHWEST:
-			return (x - 1, y - 1)
-		elif dir == NORTHEAST:
-			return (x + 1, y - 1)
-		elif dir == SOUTHWEST:
-			return (x - 1, y + 1)
-		elif dir == SOUTHEAST:
-			return (x + 1, y + 1)
-		else:
-			return 0
-
-	def adjacent(self, (x,y)):
-		return [self.rel(NORTHWEST, (x,y)), self.rel(NORTHEAST, (x,y)),self.rel(SOUTHWEST, (x,y)),self.rel(SOUTHEAST, (x,y))]
 
 	def location(self, (x,y)):
 		return self.matrix[x][y]
